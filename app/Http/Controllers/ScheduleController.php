@@ -38,10 +38,12 @@ class ScheduleController extends Controller
               }
               $request->days_number =$new_order_days;
             }
-            // Schedule::addRow($request, $user->id);
+
+            Schedule::addRow($request, $user->id);
             // return $request->days_number;
             $sessions_dates = array($request->start_date);
-            for ($i=0; $i < 30*$request->chapter_sessions_number ; $i+=sizeof($request->days_number)) {
+            $thirty_chapters_sessions = 30 * $request->chapter_sessions_number;
+            for ($i=0; $i < $thirty_chapters_sessions ; $i+=sizeof($request->days_number)) {
               foreach ($request->days_number as $key => $day) {
                 $last_date = Carbon::parse(end($sessions_dates));
                 array_push($sessions_dates, $last_date->addDays(abs($day - Carbon::parse($last_date)->dayOfWeek+1))->format('Y-m-d'));

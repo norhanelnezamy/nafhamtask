@@ -21,10 +21,10 @@ class Schedule extends Model
     public static function addRow($request, $user_id)
     {
       $schedule = new Schedule();
-      $request->user_id = $user_id;
+      $schedule->user_id = $user_id;
       $schedule->start_date = $request->start_date;
       $schedule->days_number = json_encode(sort($request->days_number));
-      $schedule->chapter_sessions_number = $request->sessions_number;
+      $schedule->chapter_sessions_number = $request->chapter_sessions_number;
       $schedule->save();
     }
 
