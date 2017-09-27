@@ -24,7 +24,6 @@ class ScheduleController extends Controller
           if ($validator->fails()) {
               return response()->json(['error' => $validator->errors()]);
           }
-          // Schedule::addRow($request, $user->id);
 
           $start_date_key = array_search(Carbon::parse($request->start_date)->dayOfWeek+1, $request->days_number);
           if (!empty($start_date_key)) {
@@ -39,6 +38,7 @@ class ScheduleController extends Controller
               }
               $request->days_number =$new_order_days;
             }
+            // Schedule::addRow($request, $user->id);
             // return $request->days_number;
             $sessions_dates = array($request->start_date);
             for ($i=0; $i < 30*$request->chapter_sessions_number ; $i+=sizeof($request->days_number)) {
